@@ -174,7 +174,7 @@ module ActiveMerchant #:nodoc:
           :installments => options[:installments] || 12,
           :startdate => options[:startdate] || "immediate",
           :periodicity => options[:periodicity].to_s || "monthly",
-          :comments => options[:comments] || nil,
+          :periodic_comments => options[:periodic_comments] || nil,
           :threshold => options[:threshold] || 3
         )
         commit(money, creditcard, options)
@@ -326,7 +326,7 @@ module ActiveMerchant #:nodoc:
             :terminaltype => options[:terminaltype],
             :ip => options[:ip],
             :reference_number => options[:reference_number],
-            :recurring => options[:recurring] || "NO",  #DO NOT USE if you are using the periodic billing option.
+            :recurring => options[:recurring],  #DO NOT USE if you are using the periodic billing option.
             :tdate => options[:tdate]
           },
           :orderoptions => {
@@ -339,7 +339,7 @@ module ActiveMerchant #:nodoc:
             :threshold => options[:threshold],
             :startdate => options[:startdate],
             :periodicity => options[:periodicity],
-            :comments => options[:comments]
+            :comments => options[:periodic_comments]
           },
           :telecheck => {
             :routing => options[:telecheck_routing],
@@ -351,6 +351,10 @@ module ActiveMerchant #:nodoc:
             :void => options[:telecheck_void],
             :accounttype => options[:telecheck_accounttype],
             :ssn => options[:telecheck_ssn],
+          },
+          :notes => {
+            :comments => options[:comments],
+            :referred => options[:referred]
           }
         }
 
